@@ -1,44 +1,20 @@
-% Entrada dos Dados
-parent(jafe, gomer).
-parent(jafe, magoge).
-parent(jafe, madai).
-parent(jafe, javan).
-parent(jafe, tubal).
-parent(jafe, meseque).
-parent(jafe, tiras).
-parent(gomer, asquenaz).
-parent(gomer, rifate).
-parent(gomer, togarma).
-parent(javan, eliza).
-parent(javan, tarsis).
-parent(javan, quitim).
-parent(javan, dodaim).
-parent(cao, cuxe).
-parent(cao, misraim).
-parent(cao, pute).
-parent(cao, canaa).
-parent(cuxe, ninrode).
-parent(cuxe, seba).
-parent(cuxe, havila).
-parent(cuxe, sabta).
-parent(cuxe, raama).
-parent(cuxe, sabteca).
-parent(misraim, ludim).
-parent(misraim, anaquim).
-parent(misraim, leabim).
-parent(misraim, naftum).
-parent(misraim, patrusim).
-parent(misraim, causulim).
-parent(raama, seba).
-parent(raama, deda).
 
-%Funcao para escrever
-all_ancestors(X) :-  familiares(Y,X),
-    writeln(Y),
-    fail.
+pway(a, b, 10).
+pway(b, c, 15).
+pway(d, c, 5).
+pway(d, b, 10).
 
-%Recursao para retornar o ancestral
-familiares(X,Y) :-  parent(X,Y).
+% Predicado caso eles ja estejam conectados vice-versa
 
-familiares(X,Y) :- parent(X,Z),
-    familiares(Z,Y).
+connected(X, Y, N) :- pway(X, Y, N).
+connected(X , Y, N) :- pway(Y, X, N).
+
+solve(Y, X ,P, N) :- solve2(X, Y, [X], 0, P, N).
+% Encontra uma passagem em X para A com determinada distancia
+solve2(X, Y, V, Tamanho, P, N) :- connected(X, A, Distancia).
+% O menber faz a pesquisa evitando se o A ja foi visitado
++menber(A, V).
+Tamanho :- Total is Tamanho + Distancia.
+
+solve2(A, Y, [A|Visitado], TamanhoTotal, P, N).
+% Chame recursivamente solve com A fazendo a prox busca
