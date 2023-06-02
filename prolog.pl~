@@ -14,7 +14,7 @@ solve(Y, X ,P, N) :- solve2(X, Y, [X], 0, P, N).
 solve2(X, Y, V, Tamanho, P, N) :- connected(X, A, Distancia).
 % O menber faz a pesquisa evitando se o A ja foi visitado
 +menber(A, V).
-Tamanho Total is Tamanho + Distancia.
+Tamanho :- Total is Tamanho + Distancia.
 
 solve2(A, Y, [A|Visitado], TamanhoTotal, P, N).
 % Chame recursivamente solve com A fazendo a prox busca
